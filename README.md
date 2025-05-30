@@ -16,17 +16,17 @@ The first dataset, ``recipes``, includes 83,782 entries where each entry is a re
 
 |  Column             | Description |
 |  -------------------|------------------ |
-|  'name'	            | Recipe name |
-|  'id'	              | Recipe ID |
-|  'minutes'          | Minutes to prepare recipe |
-|  'contributor_id'   | User ID who submitted this recipe |
-|  'submitted'        | Date recipe was submitted |
-|  'tags'             | Food.com tags for recipe |
-|  'nutrition'	      | Nutrition information in the form [calories (#), total fat (PDV), <br> sugar (PDV), sodium (PDV), protein (PDV), saturated fat (PDV), <br> carbohydrates (PDV)]; PDV stands for “percentage of daily value" |
-|  'n_steps'	        | Number of steps in recipe |
-|  'steps'            | Text for recipe steps, in order |
-|  'description'	    | User-provided description |
-|  'ingredients'	    | Text for recipe ingredients |
-|  'n_ingredients'    | Number of ingredients in recipe |
+|  ``'name'``	            | Recipe name |
+|  ``'id'``	              | Recipe ID |
+|  ``'minutes'``          | Minutes to prepare recipe |
+|  ``'contributor_id'``   | User ID who submitted this recipe |
+|  ``'submitted'``        | Date recipe was submitted |
+|  ``'tags'``             | Food.com tags for recipe |
+|  ``'nutrition'``	      | Nutrition information in the form [calories (#), total fat (PDV), <br> sugar (PDV), sodium (PDV), protein (PDV), saturated fat (PDV), <br> carbohydrates (PDV)]; PDV stands for “percentage of daily value" |
+|  ``'n_steps'``	        | Number of steps in recipe |
+|  ``'steps'``            | Text for recipe steps, in order |
+|  ``'description'``	    | User-provided description |
+|  ``'ingredients'``	    | Text for recipe ingredients |
+|  ``'n_ingredients'``    | Number of ingredients in recipe |
 
 test
