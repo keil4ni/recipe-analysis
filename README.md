@@ -44,23 +44,29 @@ With our datasets, we can investigate whether the duration of recipes have a pos
 ## Data Cleaning and Exploratory EDA
 
 talk abt cleaning steps + why we cleaned like that
+
 show clean df
 
 ### Univariate Analysis
 
 explanation
+
 graph
 
 ### Bivariate Analysis
 
 explanation
+
 graph
 
 ### Interesting Aggregates
 
 explanation
+
 pivot table
+
 explanation
+
 graph
 
 ## Assessment of Missingness
@@ -105,6 +111,7 @@ Since our project will be using ratings, we will be removing the recipes that do
 
 Key definitions: 
 Long recipes: greater or equal to 60 minutes
+
 Short recipes: less than 60 minutes
 
 Based on the analysis, there is no evidence to support the claim that recipes with longer cooking times (60 minutes or more) have higher ratings than those with shorter cooking times. The observed data shows that long recipes tend to have slightly lower average ratings compared to short recipes. The one-sided permutation test yielded a p-value of 1.0, indicating that the observed difference is not consistent with the hypothesis that long recipes are rated higher. Therefore, cooking time does not appear to positively influence user ratings in this dataset.
