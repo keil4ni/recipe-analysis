@@ -12,7 +12,7 @@ By analyzing these variables, we want to see if there's a pattern, do people rew
 
 We are analyzing two datasets from [food.com](https://www.food.com/), containing recipes and user ratings posted between 2008 and 2018. These datasets were originally compiled for a research paper on recommender systems titled "Generating Personalized Recipes from Historical User Preferences" by Majumder et al.
 
-The first dataset, ``recipes``, includes 83,782 entries where each entry is a recipe. The dataset contains 10 columns that capture various attributes of each recipe, such as:
+The first dataset, ``recipes``, includes 83,782 entries where each row is a recipe. The dataset contains 10 columns that capture various attributes of each recipe, such as:
 
 |  Column             | Description |
 |  -------------------|------------------ |
@@ -29,16 +29,45 @@ The first dataset, ``recipes``, includes 83,782 entries where each entry is a re
 |  ``'ingredients'``	    | Text for recipe ingredients |
 |  ``'n_ingredients'``    | Number of ingredients in recipe |
 
+The second dataset, ``interactions``, includes 731,927 entries where each row is a user's interaction with a recipe—typically a review or rating. This dataset helps capture user preferences and engagement over time. The 5 columns included are:
+
+|  Column             | Description |
+|  -------------------|------------------ |
+|  ``'user_id'``	    | User ID |
+|  ``'recipe_id'``	  | Recipe ID |
+|  ``'date'``         | Date of interaction |
+|  ``'rating'``       | Rating given |
+|  ``'review'``       | Review text |
+
+With our datasets, we can investigate whether the duration of recipes have a positive impact on recipe ratings. (continue explanation on how we plan to use these datasets to answer our proj question)
+
 ## Data Cleaning and Exploratory EDA
 
-continue here
+talk abt cleaning steps + why we cleaned like that
+
+show clean df
 
 ### Univariate Analysis
-continue
+
+explanation
+
+graph
 
 ### Bivariate Analysis
 
+explanation
+
+graph
+
 ### Interesting Aggregates
+
+explanation
+
+pivot table
+
+explanation
+
+graph
 
 ## Assessment of Missingness
 Not every recipe in the dataset has a rating, so it’s important to think about why some ratings are missing.
@@ -74,16 +103,13 @@ Since our project will be using ratings, we will be removing the recipes that do
 
 ## Hypothesis Testing
 
-### Null Hypothesis
-The average rating of long recipes is less than or equal to the average rating of short recipes.
+**Null Hypothesis:** The average rating of long recipes is less than or equal to the average rating of short recipes.
 
-### Alternate Hypothesis
-The average rating of long recipes is greater than the average rating of short recipes.
+**Alternate Hypothesis:** The average rating of long recipes is greater than the average rating of short recipes.
 
-### Test Statistics
-Difference of mean ratings between long recipes and short recipes
+**Test Statistic:** Difference of mean ratings between long recipes and short recipes
 
-### Defining
+Key definitions: 
 Long recipes: greater or equal to 60 minutes
 
 Short recipes: less than 60 minutes
