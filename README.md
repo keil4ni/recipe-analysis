@@ -29,14 +29,14 @@ The first dataset, ``recipes``, includes 83,782 entries where each entry is a re
 |  ``'ingredients'``	    | Text for recipe ingredients |
 |  ``'n_ingredients'``    | Number of ingredients in recipe |
 
-### Data Cleaning and Exploratory EDA
+## Data Cleaning and Exploratory EDA
 
 continue here
 
-### Univariante Analysis
+### Univariate Analysis
 continue
 
-### Bivariante Analysis
+### Bivariate Analysis
 
 ### Interesting Aggregates
 
@@ -93,13 +93,11 @@ Based on the analysis, there is no evidence to support the claim that recipes wi
 ## Framing a Prediction Problem
 In our initial hypothesis testing, we were unable to find a statistically significant relationship between the length of a recipe and its rating. Therefore, we concluded that it would not be appropriate to create a model that predicted a recipe's average rating based on it's length in minutes.
 
-Our new plan is to **predict a recipe's average rating** using a **regression** model. We decided to approach this as a regression problem rather than classification because it involves continuous values. We thought that rounding a value up or down may introduce bias or inaccurately reflect a recipe's average rating.
+Our new plan is to **predict how long a recipe will take to finish** using a **regression** model. We decided to approach this as a regression problem rather than classification because it involves continuous values, so it would be tedious to treat each numeric value as a category. In particular, we will be utilizing a simple linear regression model to solve our problem. Compared to other regression models, (i.e decision trees) simple linear regression is easier to interpret and it makes more sense to find a linear relationship between these two variables. 
 
-In particular, we will be utilizing the TF-IDF model to solve our problem. Since user ratings reflect how good or bad a recipe is, we believe that performing text analysis may be a better indicator of how a recipe is rated rather than looking at only the length of a recipe. We will also be evaluating our model by using the ___
+We will be evaluating our model with the $R^2$ value, also known as the coefficient of determination. We decided to use this value because it can be used to explain how much of variation in recipe's duration is explained by the number of steps it has. Additionally, the square-root of $R^2$ gives us the correlation coefficient for our model which helps measure the strength and direction between a recipe's duration and the number of steps it has.
 
 At the time of prediction, we will utilize the dataset we've created which contains all of the columns from the ``recipes`` and ``interactions`` files—all of which are related to their corresponding recipes and are referenced in the Introduction. To train our model, we will heavily rely on the review and rating columns, both of which originally come from the ``interactions`` csv file.
-
-(fix this later)
 
 ## Baseline Model
 Write something
