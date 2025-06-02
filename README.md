@@ -48,26 +48,47 @@ talk abt cleaning steps + why we cleaned like that
 show clean df
 
 ### Univariate Analysis
+In this section we will be conducting univariant analysis, which is looking at a single variable in the dataset.
+#### Rating Distribution
 
-explanation
+In the graph below we see that there is more 5 star ratings than any other rating, leading to a left-skew, indicating that lower rated food is are far fewer than high rated food
 
-graph
+graph 1 (fig)
+
+#### Short vs Long recipe Distribution
+
+Our analysis below concludes that there are more recipes that take less than an hour to prepare compared to recipes that take an hour or more to make.
+graph (fig2)
 
 ### Bivariate Analysis
-
+In this section we will be looking at graphs that look at two variables
 explanation
 
+#### Distribution of long and short recipes' rating
+The graph below indicates that there is a left skew for both time durations.
 graph
+graph (fig5)
 
 ### Interesting Aggregates
+For this section we will be looking at interesting things that we found from our EDA after cleaning the data.
 
-explanation
+#### Average Number of Minutes per Rating
 
-pivot table
+graph (avg_mpr_fig)
 
-explanation
+After pivoting the table to find the average time for each rating, we see that one star ratings had the longest average time of about 99 minutes compared to any other rating. This is interesting as typically longer meals "should" in theory make better meals, however this data contradicts this sentiment as 3 star ratings had the least amount of time at about 87 minutes while 5 star ratings was near 94 minutes average.
 
-graph
+#### Number of Recipes based on Recipe Type (short/long) per Rating
+
+graph (count_fig)
+
+In this analysis, we looked at the count of recipes per rating depending on short or long recipes. We found that 5 star reciepes were the most common for both time scenarios. This could be because if the meal was not good people are less likely to rate the recipe. Furthermore, we can tell that there is a larger amount of long recipes that take over an hour to make compared to short recipes that take less than an hour.
+
+#### Average Number of Minutes based on Recipe Type (short/long) per Rating
+
+graph (avg_fig)
+
+In this analysis we, we examined the distribution of the average minutes of each rating between short and long times. From this we see that the average amount of minutes for short ratings are about the same no matter which rating it is given, whereas the average minutes for longer recipes vary more.
 
 ## Assessment of Missingness
 Not every recipe in the dataset has a rating, so it’s important to think about why some ratings are missing.
@@ -84,14 +105,12 @@ Missing by design: where it is a choice to not have a rating
 
 In this case, it’s most likely that the missing ratings are Not Missing At Random (NMAR). People are generally more likely to leave a review if they either loved a recipe or really disliked it. If a recipe was just okay or they didn’t finish making it, they might not rate it at all. So the missing ratings might actually reflect lower satisfaction, we just don’t see it and are unable to confirm it.
 
-(show graph here)
-
 ### Missingness Dependency
 Null Hypothesis (H₀): The average cooking time is the same for rated and unrated recipes.
 
 Alternative Hypothesis (H₁): The average cooking time is different for rated and unrated recipes.
 
-(show graph here)
+graph (missing_perm)
 
 After running a permutation test, we have concluded that recipes without ratings take a lot longer to make compared to recipes that do have ratings. This tells us that longer recipes are less likely to get rated. So the missing ratings probably aren't random. Maybe people just don’t finish them, or don’t feel like leaving a review after spending a long time cooking.
 
@@ -114,6 +133,9 @@ Long recipes: greater or equal to 60 minutes
 
 Short recipes: less than 60 minutes
 
+graph (hypo_test)
+
+#### Conclusion of Permutation Test
 Based on the analysis, there is no evidence to support the claim that recipes with longer cooking times (60 minutes or more) have higher ratings than those with shorter cooking times. The observed data shows that long recipes tend to have slightly lower average ratings compared to short recipes. The one-sided permutation test yielded a p-value of 1.0, indicating that the observed difference is not consistent with the hypothesis that long recipes are rated higher. Therefore, cooking time does not appear to positively influence user ratings in this dataset.
 
 ## Framing a Prediction Problem
@@ -126,12 +148,59 @@ We will be evaluating our model with the R<sup>2</sup> value, also known as the 
 At the time of prediction, we will utilize the dataset we've created which contains all of the columns from the ``recipes`` and ``interactions`` files—all of which are related to their corresponding recipes and are referenced in the Introduction. To train our model, we will heavily rely on the review and rating columns, both of which originally come from the ``interactions`` csv file.
 
 ## Baseline Model
-Write something
+Our baseline model will be looking at predicting time of recipe based on the number of steps. In order to do this we are splitting our data into a training and test data set using the features `minutes` and `n_steps`. Then, using mean squared regression we predict using the training data.
+
+Intercept: 35.55
+
+A recipe with zero steps would (theoretically) take about 36 minutes, which is not true realistically.
+
+Slope (minutes per step): 5.70
+
+Each additional recipe step adds about 5.70 minutes on average.
+
+Mean Squared Error: 450036.54
+
+This is huge, which suggests the model’s predictions are very far off on average.
+
+R² Score: 0.00
+
+This means the number of steps has no meaningful linear relationship with the total cooking time in this dataset.
+
+Leaving us with:
+
+`minutes` = 38.02 + 5.74 × `n_steps`
+
+graph (baseline_model)
+
+#### Baseline Model Conclusion
+
+Based on the linear regression analysis, there is no meaningful relationship between the number of steps in a recipe and its total cooking time. The model produced an R² score of 0.00, which indicates that the number of steps explains none of the variation in cooking time across the dataset. Additionally, the mean squared error was high (645,937.88), suggesting that the model’s predictions are not accurate. This relationship is not reliable due to the poor model fit.
 
 ## Final Model 
-Write something
+In order to remedy this dilemma we decided to try and get rid of some of the outliers that may be influencing this model. In order to do this we used IQR to create a lower and upper bound, removing anything that took to much time or too little time. Additionally, added `n_ingredients` to help make the model more accurate.
+
+Since cooking times were skewed, we applied a log transformation to the target variable (minutes) to better meet the assumptions of linear regression.
+
+Afterwards, we use a Random Forest regression model. We evaluated the model by predicting on the test set, transforming predictions back to the original scale, and calculating the Mean Squared Error (MSE) and R² score.
+
+From this our result was:
+
+Mean Squared Error: 472.77
+
+On average, the squared difference between the actual cooking times and our model’s predictions is about 472.77.
+
+R² Score: 0.23
+
+This means our model explains about 23% of the variation in cooking times.
+
+graph(final_model)
+
+#### Final Model Conclusion
+Our final model was a major improvement from the base model with the MSE decreasing dramatically from 450036.54 to 472.77 and our R-squared value going from 0.00 to 0.23. While the model captures some relationship between the number of steps, number of ingredients, and cooking time, much of the variation remains unexplained, suggesting that other factors also influence cooking time.
 
 ## Fairness Analysis
-Write something
-(add graph)
+In this section, we will look at whether our cooking time prediction model performs equally across different types of recipes, comparing recipes with shorter cooking times to those with longer cooking times.
+
+graph(fairness)
+
 When attempting to predict minutes based on number of steps, we can see that there is a major discrepency between the 2. While short recipes that are under 60 minutes have a mean absolute error of around 13 minutes, longer recipes 60 minutes and above have a mean absolute error of about 35 minutes. This means that the prediction is not as accurate for longer cooking times rather than short ones, which may be caused by more complex steps, longer cooking times, or other factors.
