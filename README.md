@@ -201,6 +201,6 @@ Our final model was a major improvement from the base model with the MSE decreas
 ## Fairness Analysis
 In this section, we will look at whether our cooking time prediction model performs equally across different types of recipes, comparing recipes with shorter cooking times to those with longer cooking times.
 
-graph(fairness)
+<iframe src = "assets/fairness.html" width = "800" height = "600" frameborder = "0"></iframe>
 
 When attempting to predict minutes based on number of steps, we can see that there is a major discrepency between the 2. While short recipes that are under 60 minutes have a mean absolute error of around 13 minutes, longer recipes 60 minutes and above have a mean absolute error of about 35 minutes. This means that the prediction is not as accurate for longer cooking times rather than short ones, which may be caused by more complex steps, longer cooking times, or other factors.
