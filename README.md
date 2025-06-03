@@ -39,7 +39,7 @@ The second dataset, ``interactions``, includes 731,927 entries where each row is
 |  ``'rating'``       | Rating given |
 |  ``'review'``       | Review text |
 
-With our datasets, we can investigate whether the duration of recipes have a positive impact on recipe ratings. (continue explanation on how we plan to use these datasets to answer our proj question)
+With our datasets, we can investigate whether the duration of recipes have a positive impact on recipe ratings. The first step was to classify what is considered a "long" recipe or a "short" recipe. We believed there are more people that look for short recipes to follow for time convenience, so we decided that a **short** recipe would be **less than 60 minutes** long while a **long** recipe would be involve all other recipes, that is, **at least 60 minutes** long. To make it easy to distinguish between short and long recipes, we created an additional column that classifies a recipe by its duration called ``'recipe_type'``. We will heavily rely on this column, along with other relevant columns—``'rating'``, ``'minutes'``—in the dataset to answer our question.
 
 ## Data Cleaning and Exploratory EDA
 
