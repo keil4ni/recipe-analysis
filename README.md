@@ -1,6 +1,9 @@
 # Recipe Length Analysis
 Authors: Casey So & Keilani Li
 
+## Overview
+This project explores whether the cooking time of a recipe has any impact on its user rating.
+
 ## Introduction
 When looking for a recipe online, one of the first things people notice aside from the ingredients is cooking time. Some users look for quick meals that can be done in under 30 minutes, while others are willing to invest time into more complex dishes. This raises an important question we have: does the cooking time influence how well it's rated?
 
