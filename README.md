@@ -59,7 +59,8 @@ For our first graph, we wanted to look at the distribution of ratings. In the gr
 #### Short vs Long recipe Distribution
 
 Our analysis below concludes that there are more recipes that take less than an hour to prepare compared to recipes that take an hour or more to make.
-graph (fig2)
+
+<iframe src = "assets/duration-distrib.html" width = "800" height = "600" frameborder = "0"></iframe>
 
 ### Bivariate Analysis
 In this section we will be looking at graphs that look at two variables
@@ -67,27 +68,27 @@ explanation
 
 #### Distribution of long and short recipes' rating
 The graph below indicates that there is a left skew for both time durations.
-graph
-graph (fig5)
+
+<iframe src = "assets/duration-rating-distrib.html" width = "800" height = "600" frameborder = "0"></iframe>
 
 ### Interesting Aggregates
 For this section we will be looking at interesting things that we found from our EDA after cleaning the data.
 
 #### Average Number of Minutes per Rating
 
-graph (avg_mpr_fig)
+<iframe src = "assets/avg-minutes-per-rating.html" width = "800" height = "600" frameborder = "0"></iframe>
 
 After pivoting the table to find the average time for each rating, we see that one star ratings had the longest average time of about 99 minutes compared to any other rating. This is interesting as typically longer meals "should" in theory make better meals, however this data contradicts this sentiment as 3 star ratings had the least amount of time at about 87 minutes while 5 star ratings was near 94 minutes average.
 
 #### Number of Recipes based on Recipe Type (short/long) per Rating
 
-graph (count_fig)
+<iframe src = "assets/total-recipes-rating.html" width = "800" height = "600" frameborder = "0"></iframe>
 
 In this analysis, we looked at the count of recipes per rating depending on short or long recipes. We found that 5 star reciepes were the most common for both time scenarios. This could be because if the meal was not good people are less likely to rate the recipe. Furthermore, we can tell that there is a larger amount of long recipes that take over an hour to make compared to short recipes that take less than an hour.
 
 #### Average Number of Minutes based on Recipe Type (short/long) per Rating
 
-graph (avg_fig)
+<iframe src = "assets/avg-minutes-recipe-type.html" width = "800" height = "600" frameborder = "0"></iframe>
 
 In this analysis we, we examined the distribution of the average minutes of each rating between short and long times. From this we see that the average amount of minutes for short ratings are about the same no matter which rating it is given, whereas the average minutes for longer recipes vary more.
 
@@ -111,15 +112,13 @@ Null Hypothesis (H₀): The average cooking time is the same for rated and unrat
 
 Alternative Hypothesis (H₁): The average cooking time is different for rated and unrated recipes.
 
-graph (missing_perm)
+<iframe src = "assets/missing-permutation.html" width = "800" height = "600" frameborder = "0"></iframe>
 
 After running a permutation test, we have concluded that recipes without ratings take a lot longer to make compared to recipes that do have ratings. This tells us that longer recipes are less likely to get rated. So the missing ratings probably aren't random. Maybe people just don’t finish them, or don’t feel like leaving a review after spending a long time cooking.
 
 ### Handling Missingness
 
 Since our project will be using ratings, we will be removing the recipes that do not have a rating. This will reduce the missingness in average rating and prevent our data from being skewed.
-
-(show result here)
 
 ## Hypothesis Testing
 
@@ -134,7 +133,7 @@ Long recipes: greater or equal to 60 minutes
 
 Short recipes: less than 60 minutes
 
-graph (hypo_test)
+<iframe src = "assets/hypothesis_test.html" width = "800" height = "600" frameborder = "0"></iframe>
 
 #### Conclusion of Permutation Test
 Based on the analysis, there is no evidence to support the claim that recipes with longer cooking times (60 minutes or more) have higher ratings than those with shorter cooking times. The observed data shows that long recipes tend to have slightly lower average ratings compared to short recipes. The one-sided permutation test yielded a p-value of 1.0, indicating that the observed difference is not consistent with the hypothesis that long recipes are rated higher. Therefore, cooking time does not appear to positively influence user ratings in this dataset.
@@ -171,7 +170,7 @@ Leaving us with:
 
 `minutes` = 38.02 + 5.74 × `n_steps`
 
-graph (baseline_model)
+<iframe src = "assets/baseline-model.html" width = "800" height = "600" frameborder = "0"></iframe>
 
 #### Baseline Model Conclusion
 
@@ -194,7 +193,7 @@ R² Score: 0.23
 
 This means our model explains about 23% of the variation in cooking times.
 
-graph(final_model)
+<iframe src = "assets/final-model.html" width = "800" height = "600" frameborder = "0"></iframe>
 
 #### Final Model Conclusion
 Our final model was a major improvement from the base model with the MSE decreasing dramatically from 450036.54 to 472.77 and our R-squared value going from 0.00 to 0.23. While the model captures some relationship between the number of steps, number of ingredients, and cooking time, much of the variation remains unexplained, suggesting that other factors also influence cooking time.
