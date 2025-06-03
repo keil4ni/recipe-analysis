@@ -48,12 +48,13 @@ talk abt cleaning steps + why we cleaned like that
 show clean df
 
 ### Univariate Analysis
-In this section we will be conducting univariant analysis, which is looking at a single variable in the dataset.
+In this section we will be conducting univariate analysis, which is looking at a single variable in the dataset.
+
 #### Rating Distribution
 
-In the graph below we see that there is more 5 star ratings than any other rating, leading to a left-skew, indicating that lower rated food is are far fewer than high rated food
+For our first graph, we wanted to look at the distribution of ratings. In the graph below, it is evident that there are more 5 star ratings than any other rating, creating a left-skewed distribution. This also indicates that there are less recipes with lower-ratings than recipes with high ratings.
 
-graph 1 (fig)
+<iframe src = "assets/rating-distrib.html" width = "800" height = "600" frameborder = "0"></iframe>
 
 #### Short vs Long recipe Distribution
 
