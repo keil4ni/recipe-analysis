@@ -233,7 +233,7 @@ Leaving us with:
 Based on the linear regression analysis, there is no meaningful relationship between the number of steps in a recipe and its total cooking time. The model produced an R² score of 0.00, which indicates that the number of steps explains none of the variation in cooking time across the dataset. Additionally, the mean squared error was high (645,937.88), suggesting that the model’s predictions are not accurate. This relationship is not reliable due to the poor model fit.
 
 ## Final Model 
-In order to remedy this dilemma we decided to try and get rid of some of the outliers that may be influencing this model. In order to do this we used IQR to create a lower and upper bound, removing anything that took to much time or too little time. Additionally, added `n_ingredients` to help make the model more accurate.
+In order to remedy this dilemma we decided to try and get rid of some of the outliers that may be influencing this model. In order to do this we used IQR to create a lower and upper bound, removing anything that took to much time or too little time. Additionally, added `n_ingredients` to help make the model more accurate. We chose to use 'n_ingredients' as it is another factor in the prediction of reciepe time as more ingredients would mean more prepping and cooking time. Having more variables will help to create a better prediction time.
 
 Since cooking times were skewed, we applied a log transformation to the target variable (minutes) to better meet the assumptions of linear regression.
 
