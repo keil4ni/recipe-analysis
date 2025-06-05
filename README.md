@@ -2,7 +2,7 @@
 Authors: Casey So & Keilani Li
 
 ## Overview
-This project explores whether the cooking time of a recipe has any impact on its user rating.
+This project explores the relationship between a recipe's cooking time and its user rating and the relationship between cooking time and the number of steps.
 
 ## Introduction
 When looking for a recipe online, one of the first things people notice aside from the ingredients is cooking time. Some users look for quick meals that can be done in under 30 minutes, while others are willing to invest time into more complex dishes. This raises an important question we have: does the cooking time influence how well it's rated?
@@ -176,8 +176,7 @@ Test Statistic: Difference in mean between recipes with ratings and recipes with
 
 Significance Level: 0.05
 
-graph(m_dep1) 
-<iframe src = "assets/missing-permutation.html" width = "800" height = "600" frameborder = "0"></iframe>
+<iframe src = "assets/missingness-dep1.html" width = "800" height = "600" frameborder = "0"></iframe>
 
 After conducting a permutation test, we found that our observed difference in average cooking time of missing ratings and not missing ratings is about -64 minutes. 
 
@@ -194,7 +193,7 @@ Test Statistic: Difference in mean between recipes with ratings and recipes with
 
 Significance Level: 0.05
 
-graph m_dep2
+<iframe src = "assets/missingness-dep2.html" width = "800" height = "600" frameborder = "0"></iframe>
 
 After conducting a permutation test to evaluate whether the missingness of a recipe's description had an effect on the missingness of ratings. We found the observed difference to be about -0.0148.
 
