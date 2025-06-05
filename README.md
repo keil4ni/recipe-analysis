@@ -272,7 +272,7 @@ This means the number of steps has no meaningful linear relationship with the to
 
 Leaving us with:
 
-`minutes` = 38.02 + 5.74 × `n_steps`
+`minutes` = 35.55 + 5.70 × `n_steps`
 
 <iframe src = "assets/baseline-model.html" width = "800" height = "600" frameborder = "0"></iframe>
 
