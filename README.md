@@ -207,6 +207,8 @@ Since the p-value is more than the significance level, we **fail to reject the n
 Since our project will be using ratings, we will be removing the recipes that do not have a rating. This will reduce the missingness in average rating and prevent our data from being skewed.
 
 ## Hypothesis Testing
+**Question**
+Do Long Recipes Recieve Higher Ratings?
 
 **Null Hypothesis:** The average rating of long recipes is less than or equal to the average rating of short recipes.
 
@@ -223,6 +225,11 @@ Short recipes: less than 60 minutes
 
 #### Conclusion of Permutation Test
 Based on the analysis, there is no evidence to support the claim that recipes with longer cooking times (60 minutes or more) have higher ratings than those with shorter cooking times. The observed data shows that long recipes tend to have slightly lower average ratings compared to short recipes. The one-sided permutation test yielded a p-value of 1.0, indicating that the observed difference is not consistent with the hypothesis that long recipes are rated higher. Therefore, cooking time does not appear to positively influence user ratings in this dataset.
+
+#### Justification
+- We compared means because the rating variable is quantitative. 
+- We conducted a one-sided test because we wanted to know if longer recipes had higher ratings.
+- We used a permutation test because it is well-suited to compare group means and is non-parametric 
 
 ## Framing a Prediction Problem
 In our initial hypothesis testing, we were unable to find a statistically significant relationship between the length of a recipe and its rating. Therefore, we concluded that it would not be appropriate to create a model that predicted a recipe's average rating based on it's length in minutes.
