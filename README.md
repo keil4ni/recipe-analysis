@@ -342,3 +342,10 @@ To do this we will be comparing the absolute prediction errors from these two gr
 <iframe src = "assets/fairness.html" width = "800" height = "600" frameborder = "0"></iframe>
 
 When attempting to predict minutes based on number of steps, we can see that there is a major discrepency between the 2. While short recipes that are under 60 minutes have a mean absolute error of around 13 minutes, longer recipes 60 minutes and above have a mean absolute error of about 35 minutes. This means that the prediction is not as accurate for longer cooking times rather than short ones, which may be caused by more complex steps, longer cooking times, or other factors.
+
+When completing a permuation test we found our p-value to be 0.00, which is less than 0.05.
+
+We reject the null hypothesis that our model is fair.
+
+
+
