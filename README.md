@@ -2,7 +2,7 @@
 Authors: Casey So & Keilani Li
 
 ## Overview
-This project explores whether the cooking time of a recipe has any impact on its user rating.
+This project explores the relationship between a recipe's cooking time and its user rating and the relationship between cooking time and the number of steps.
 
 ## Introduction
 When looking for a recipe online, one of the first things people notice aside from the ingredients is cooking time. Some users look for quick meals that can be done in under 30 minutes, while others are willing to invest time into more complex dishes. This raises an important question we have: does the cooking time influence how well it's rated?
@@ -104,7 +104,7 @@ As there are many columns, we will showcase the first 5 rows of our cleaned data
 | 306168.0  | 412 broccoli casserole             | 40.0    | 6       | 5.0    | 5.0         | short (<1 hr) |
 
 ### Univariate Analysis
-In this section we will be conducting univariate analysis, which is looking at a single variable in the dataset.
+In this section we will be conducting univariate analysis, which includes looking at a single variable in the dataset.
 
 #### Rating Distribution
 
@@ -176,14 +176,13 @@ Test Statistic: Difference in mean between recipes with ratings and recipes with
 
 Significance Level: 0.05
 
-graph(m_dep1) 
-<iframe src = "assets/missing-permutation.html" width = "800" height = "600" frameborder = "0"></iframe>
+<iframe src = "assets/missingness-dep1.html" width = "800" height = "600" frameborder = "0"></iframe>
 
 After conducting a permutation test, we found that our observed difference in average cooking time of missing ratings and not missing ratings is about -64 minutes. 
 
 With a significance level of 0.05, our p-value was 0.00. 
 
-Since the p-value is less than the significance level, we **reject the null hypothesis** that the missingness of results is independent from cooking time (`minutes`). 
+Since the p-value is less than the significance level, we **reject the null hypothesis**. There is evidence that the missingness of ratings is dependent on cooking time. Perhaps users thought the recipe they followed took more time than expected and decided not to rate it.
 
 #### Rating and Descriptions
 Null Hypothesis (H₀): The missingness of ratings is not dependent on descriptions.
@@ -194,13 +193,13 @@ Test Statistic: Difference in mean between recipes with ratings and recipes with
 
 Significance Level: 0.05
 
-graph m_dep2
+<iframe src = "assets/missing-dep2.html" width = "800" height = "600" frameborder = "0"></iframe>
 
 After conducting a permutation test to evaluate whether the missingness of a recipe's description had an effect on the missingness of ratings. We found the observed difference to be about -0.0148.
 
 With a significance level of 0.05, our p-value was 0.5570.
 
-Since the p-value is more than the significance level, we **fail to reject the null hypothesis** that the missingness of results is independent from cooking time (`minutes`).
+Since the p-value is greater than the significance level, we **fail to reject the null hypothesis**. There is not enough evidence that the missingness of results is dependent on recipe descriptions.
 
 ### Handling Missingness
 
@@ -210,13 +209,13 @@ Since our project will be using ratings, we will be removing the recipes that do
 **Question**
 Do Long Recipes Recieve Higher Ratings?
 
-**Null Hypothesis:** The average rating of long recipes is less than or equal to the average rating of short recipes.
+**Null Hypothesis:** The average rating of long recipes is equal to the average rating of short recipes.
 
 **Alternate Hypothesis:** The average rating of long recipes is greater than the average rating of short recipes.
 
 **Test Statistic:** Difference of mean ratings between long recipes and short recipes
 
-Key definitions: 
+_Key definitions:_ 
 Long recipes: greater or equal to 60 minutes
 
 Short recipes: less than 60 minutes
@@ -286,25 +285,23 @@ New Features:
 
 - `log_minutes`: log-transformed `minutes`
   
-  Since cooking times were skewed, we applied a log transformation to the target variable (`minutes`).
-
-  stablize variance
-
-  normalizes distribution
+  Since cooking times were skewed, we applied a log transformation to the target variable (`minutes`). This helps stablize variance and normalizes the distribution.
+  
 - `complexity`: `n_steps` * `n_ingredients`
   
-  sense of complexity of each steps
-
-  easier for the next step
+  This gives a numerical value to represent the complexity of each step based on the amount of ingredients.
 
 Model: RandomForestRegressor
 
    We evaluated the model by predicting on the test set, transforming predictions back to the original scale, and calculating the Mean Squared Error (MSE) and R² score.
 
-Hyperparameter Tuning: using GridSearch CV
-- `n_estimators`: number of trees
-- `max_depth`: prevent overfitting
-- `min_samples_split` and `max _features`
+Hyperparameter Tuning with GridSearch CV:
+
+The following list represents the combination of hyperparameters that best optimizes our model.
+- `n_estimators` (number of trees): 100
+- `max_depth` (prevent overfitting): None
+- `min_samples_split`: 5
+- `max _features`: `sqrt`
 
 Improvement:
 - RandomForestRegressor captures complex interactions (not only linear)
@@ -312,9 +309,9 @@ Improvement:
 - transforming `minutes` reduces the skew
 - taking out outliers, makes predicting more accurate
 
-From this our result was:
+From this, our result was:
 
-Mean Squared Error: 472.58
+Mean Squared Error: 472.74
 
 On average, the squared difference between the actual cooking times and our model’s predictions is about 472.58.
 
@@ -325,7 +322,7 @@ This means our model explains about 23% of the variation in cooking times.
 <iframe src = "assets/final-model.html" width = "800" height = "600" frameborder = "0"></iframe>
 
 #### Final Model Conclusion
-Our final model was a major improvement from the base model with the MSE decreasing dramatically from 450036.54 to 472.58 and our R-squared value going from 0.00 to 0.23. While the model captures some relationship between the number of steps, number of ingredients, and cooking time, much of the variation remains unexplained, suggesting that other factors also influence cooking time.
+Our final model was a major improvement from the base model with the MSE decreasing dramatically from 450036.54 to 472.74 and our R-squared value going from 0.00 to 0.23. While the model captures some relationship between the number of steps, number of ingredients, and cooking time, much of the variation remains unexplained, suggesting that other factors also influence cooking time.
 
 ## Fairness Analysis
 To make sure that our model is fair we will conduct a fairness model to ensure that the model predicts the cooking time (`minutes`) from `n_steps` fairly for both short (under 60 minutes) and long (60 minutes or longer) recipes. 
