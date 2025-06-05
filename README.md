@@ -207,6 +207,8 @@ Since the p-value is more than the significance level, we **fail to reject the n
 Since our project will be using ratings, we will be removing the recipes that do not have a rating. This will reduce the missingness in average rating and prevent our data from being skewed.
 
 ## Hypothesis Testing
+**Question**
+Do Long Recipes Recieve Higher Ratings?
 
 **Null Hypothesis:** The average rating of long recipes is less than or equal to the average rating of short recipes.
 
@@ -224,6 +226,11 @@ Short recipes: less than 60 minutes
 #### Conclusion of Permutation Test
 Based on the analysis, there is no evidence to support the claim that recipes with longer cooking times (60 minutes or more) have higher ratings than those with shorter cooking times. The observed data shows that long recipes tend to have slightly lower average ratings compared to short recipes. The one-sided permutation test yielded a p-value of 1.0, indicating that the observed difference is not consistent with the hypothesis that long recipes are rated higher. Therefore, cooking time does not appear to positively influence user ratings in this dataset.
 
+#### Justification
+- We compared means because the rating variable is quantitative. 
+- We conducted a one-sided test because we wanted to know if longer recipes had higher ratings.
+- We used a permutation test because it is well-suited to compare group means and is non-parametric 
+
 ## Framing a Prediction Problem
 In our initial hypothesis testing, we were unable to find a statistically significant relationship between the length of a recipe and its rating. Therefore, we concluded that it would not be appropriate to create a model that predicted a recipe's average rating based on it's length in minutes.
 
@@ -234,7 +241,17 @@ We will be evaluating our model with the R<sup>2</sup> value, also known as the 
 At the time of prediction, we will utilize the dataset we've created which contains all of the columns from the ``recipes`` and ``interactions`` files—all of which are related to their corresponding recipes and are referenced in the Introduction. To train our model, we will heavily rely on the review and rating columns, both of which originally come from the ``interactions`` csv file.
 
 ## Baseline Model
-Our baseline model will be looking at predicting time of recipe based on the number of steps. In order to do this we are splitting our data into a training and test data set using the features `minutes` and `n_steps`. Then, using mean squared regression we predict using the training data.
+Our baseline model will be looking at predicting time of recipe based on the number of steps. In order to do this we are splitting our data into a training and Our baseline model will be looking at predicting time of recipe based on the number of steps. In order to do this we are splitting our data into a training and test data set using the features `minutes` and `n_steps`. Then, using mean squared regression we predict using the training data.
+
+Model Type:
+- Linear Regression 
+  predict cooking time (`minutes`) from number of steps in the recipe *(`n_steps`)
+
+Features:
+- Quantitive: 
+  `n_steps`
+- Ordinal: None
+- Nominal: None
 
 Intercept: 35.55
 
@@ -260,8 +277,9 @@ Leaving us with:
 
 #### Baseline Model Conclusion
 
-Based on the linear regression analysis, there is no meaningful relationship between the number of steps in a recipe and its total cooking time. The model produced an R² score of 0.00, which indicates that the number of steps explains none of the variation in cooking time across the dataset. Additionally, the mean squared error was high (645,937.88), suggesting that the model’s predictions are not accurate. This relationship is not reliable due to the poor model fit.
+Based on the linear regression analysis, there is no meaningful relationship between the number of steps in a recipe and its total cooking time. The model produced an R² score of 0.00, which indicates that the number of steps explains none of the variation in cooking time across the dataset. Additionally, the mean squared error was high (450036.54), suggesting that the model’s predictions are not accurate. This relationship is not reliable due to the poor model fit.
 
+## Final Model
 In order to remedy this dilemma, we decided to try and get rid of some of the outliers that may be influencing this model. In order to do this, we used IQR to create a lower and upper bound, filtering out data points that took too much or too little cooking time. 
 
 New Features:
@@ -280,7 +298,8 @@ New Features:
   easier for the next step
 
 Model: RandomForestRegressor
-  We evaluated the model by predicting on the test set, transforming predictions back to the original scale, and calculating the Mean Squared Error (MSE) and R² score.
+
+   We evaluated the model by predicting on the test set, transforming predictions back to the original scale, and calculating the Mean Squared Error (MSE) and R² score.
 
 Hyperparameter Tuning: using GridSearch CV
 - `n_estimators`: number of trees
