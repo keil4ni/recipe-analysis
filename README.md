@@ -262,18 +262,42 @@ Leaving us with:
 
 Based on the linear regression analysis, there is no meaningful relationship between the number of steps in a recipe and its total cooking time. The model produced an R² score of 0.00, which indicates that the number of steps explains none of the variation in cooking time across the dataset. Additionally, the mean squared error was high (645,937.88), suggesting that the model’s predictions are not accurate. This relationship is not reliable due to the poor model fit.
 
-## Final Model 
-In order to remedy this dilemma we decided to try and get rid of some of the outliers that may be influencing this model. In order to do this we used IQR to create a lower and upper bound, removing anything that took to much time or too little time. Additionally, added `n_ingredients` to help make the model more accurate. We chose to use 'n_ingredients' as it is another factor in the prediction of reciepe time as more ingredients would mean more prepping and cooking time. Having more variables will help to create a better prediction time.
+In order to remedy this dilemma, we decided to try and get rid of some of the outliers that may be influencing this model. In order to do this, we used IQR to create a lower and upper bound, filtering out data points that took too much or too little cooking time. 
 
-Since cooking times were skewed, we applied a log transformation to the target variable (minutes) to better meet the assumptions of linear regression.
+New Features:
 
-Afterwards, we use a Random Forest regression model. We evaluated the model by predicting on the test set, transforming predictions back to the original scale, and calculating the Mean Squared Error (MSE) and R² score.
+- `log_minutes`: log-transformed `minutes`
+  
+  Since cooking times were skewed, we applied a log transformation to the target variable (`minutes`).
+
+  stablize variance
+
+  normalizes distribution
+- `complexity`: `n_steps` * `n_ingredients`
+  
+  sense of complexity of each steps
+
+  easier for the next step
+
+Model: RandomForestRegressor
+  We evaluated the model by predicting on the test set, transforming predictions back to the original scale, and calculating the Mean Squared Error (MSE) and R² score.
+
+Hyperparameter Tuning: using GridSearch CV
+- `n_estimators`: number of trees
+- `max_depth`: prevent overfitting
+- `min_samples_split` and `max _features`
+
+Improvement:
+- RandomForestRegressor captures complex interactions (not only linear)
+- `n_ingredients` add more predictors that will help make it more accurate
+- transforming `minutes` reduces the skew
+- taking out outliers, makes predicting more accurate
 
 From this our result was:
 
-Mean Squared Error: 472.77
+Mean Squared Error: 472.58
 
-On average, the squared difference between the actual cooking times and our model’s predictions is about 472.77.
+On average, the squared difference between the actual cooking times and our model’s predictions is about 472.58.
 
 R² Score: 0.23
 
@@ -282,7 +306,7 @@ This means our model explains about 23% of the variation in cooking times.
 <iframe src = "assets/final-model.html" width = "800" height = "600" frameborder = "0"></iframe>
 
 #### Final Model Conclusion
-Our final model was a major improvement from the base model with the MSE decreasing dramatically from 450036.54 to 472.77 and our R-squared value going from 0.00 to 0.23. While the model captures some relationship between the number of steps, number of ingredients, and cooking time, much of the variation remains unexplained, suggesting that other factors also influence cooking time.
+Our final model was a major improvement from the base model with the MSE decreasing dramatically from 450036.54 to 472.58 and our R-squared value going from 0.00 to 0.23. While the model captures some relationship between the number of steps, number of ingredients, and cooking time, much of the variation remains unexplained, suggesting that other factors also influence cooking time.
 
 ## Fairness Analysis
 To make sure that our model is fair we will conduct a fairness model to ensure that the model predicts the cooking time (`minutes`) from `n_steps` fairly for both short (under 60 minutes) and long (60 minutes or longer) recipes. 
