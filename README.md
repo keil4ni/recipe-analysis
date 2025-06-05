@@ -193,7 +193,7 @@ Test Statistic: Difference in mean between recipes with ratings and recipes with
 
 Significance Level: 0.05
 
-<iframe src = "assets/missingness-dep2.html" width = "800" height = "600" frameborder = "0"></iframe>
+<iframe src = "assets/missing-dep2.html" width = "800" height = "600" frameborder = "0"></iframe>
 
 After conducting a permutation test to evaluate whether the missingness of a recipe's description had an effect on the missingness of ratings. We found the observed difference to be about -0.0148.
 
