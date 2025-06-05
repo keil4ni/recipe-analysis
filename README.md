@@ -164,13 +164,43 @@ Missing by design: where it is a choice to not have a rating
 In this case, it’s most likely that the missing ratings are Not Missing At Random (NMAR). People are generally more likely to leave a review if they either loved a recipe or really disliked it. If a recipe was just okay or they didn’t finish making it, they might not rate it at all. So the missing ratings might actually reflect lower satisfaction, we just don’t see it and are unable to confirm it.
 
 ### Missingness Dependency
-Null Hypothesis (H₀): The average cooking time is the same for rated and unrated recipes.
+In order to examine the large missingness from `ratings`, we decided to look at two of the other columns (`minutes` and `description`) to see if there is a dependency between them. In order to this, we conducted permutation tests to depcit whether their presense created a change in the ratings 
 
-Alternative Hypothesis (H₁): The average cooking time is different for rated and unrated recipes.
+#### Rating and Cooking Time
 
+Null Hypothesis (H₀): The missingness of ratings is not dependent on cooking time.
+
+Alternative Hypothesis (H₁): The missingness of ratings is dependent on cooking time.
+
+Test Statistic: Difference in mean between recipes with ratings and recipes without a rating
+
+Significance Level: 0.05
+
+graph(m_dep1) 
 <iframe src = "assets/missing-permutation.html" width = "800" height = "600" frameborder = "0"></iframe>
 
-After running a permutation test, we have concluded that recipes without ratings take a lot longer to make compared to recipes that do have ratings. This tells us that longer recipes are less likely to get rated. So the missing ratings probably aren't random. Maybe people just don’t finish them, or don’t feel like leaving a review after spending a long time cooking.
+After conducting a permutation test, we found that our observed difference in average cooking time of missing ratings and not missing ratings is about -64 minutes. 
+
+With a significance level of 0.05, our p-value was 0.00. 
+
+Since the p-value is less than the significance level, we **reject the null hypothesis** that the missingness of results is independent from cooking time (`minutes`). 
+
+#### Rating and Descriptions
+Null Hypothesis (H₀): The missingness of ratings is not dependent on descriptions.
+
+Alternative Hypothesis (H₁): The missingness of ratings is dependent on descriptions.
+
+Test Statistic: Difference in mean between recipes with ratings and recipes without a rating
+
+Significance Level: 0.05
+
+graph m_dep2
+
+After conducting a permutation test to evaluate whether the missingness of a recipe's description had an effect on the missingness of ratings. We found the observed difference to be about -0.0148.
+
+With a significance level of 0.05, our p-value was 0.5570.
+
+Since the p-value is more than the significance level, we **fail to reject the null hypothesis** that the missingness of results is independent from cooking time (`minutes`).
 
 ### Handling Missingness
 
@@ -255,7 +285,14 @@ This means our model explains about 23% of the variation in cooking times.
 Our final model was a major improvement from the base model with the MSE decreasing dramatically from 450036.54 to 472.77 and our R-squared value going from 0.00 to 0.23. While the model captures some relationship between the number of steps, number of ingredients, and cooking time, much of the variation remains unexplained, suggesting that other factors also influence cooking time.
 
 ## Fairness Analysis
-In this section, we will look at whether our cooking time prediction model performs equally across different types of recipes, comparing recipes with shorter cooking times to those with longer cooking times.
+To make sure that our model is fair we will conduct a fairness model to ensure that the model predicts the cooking time (`minutes`) from `n_steps` fairly for both short (under 60 minutes) and long (60 minutes or longer) recipes. 
+
+To do this we will be comparing the absolute prediction errors from these two groups to identify if there ia a bias. 
+
+Null Hypothesis: Our model is fair. Its precision for short recipes and long recipes are about the same.
+
+Alternative Hypothesis: Our model is unfair. Its precision forhort recipes and long recipes are different.
+
 
 <iframe src = "assets/fairness.html" width = "800" height = "600" frameborder = "0"></iframe>
 
