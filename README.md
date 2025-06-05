@@ -206,7 +206,7 @@ Since the p-value is greater than the significance level, we **fail to reject th
 Since our project will be using ratings, we will be removing the recipes that do not have a rating. This will reduce the missingness in average rating and prevent our data from being skewed.
 
 ## Hypothesis Testing
-**Question**
+**Question:**
 Do Long Recipes Recieve Higher Ratings?
 
 **Null Hypothesis:** The average rating of long recipes is equal to the average rating of short recipes.
