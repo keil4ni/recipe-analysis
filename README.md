@@ -280,7 +280,8 @@ New Features:
   easier for the next step
 
 Model: RandomForestRegressor
-  We evaluated the model by predicting on the test set, transforming predictions back to the original scale, and calculating the Mean Squared Error (MSE) and R² score.
+
+   We evaluated the model by predicting on the test set, transforming predictions back to the original scale, and calculating the Mean Squared Error (MSE) and R² score.
 
 Hyperparameter Tuning: using GridSearch CV
 - `n_estimators`: number of trees
